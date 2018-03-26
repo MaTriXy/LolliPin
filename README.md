@@ -1,14 +1,24 @@
 LolliPin [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LolliPin-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1425)
 ================
 
-A Lollipop material design styled android pincode library (API 10+)
+A Lollipop material design styled android pincode library (API 14+)
 
 
 To include in your project, add this to your build.gradle file:
 
 ```
    //Lollipin
-   compile 'com.github.orangegangsters:lollipin:1.6.0@aar'
+   compile ('com.github.orangegangsters:lollipin:2.0.0@aar') {
+      transitive = true
+   }
+```
+Starting from version 2.1.0 we will have a different package name:
+
+```
+   //Lollipin
+   compile ('com.github.omadahealth:lollipin:2.1.0@aar') {
+      transitive = true
+   }
 ```
 
 ![Demo](app/src/main/res/raw/github_gif.gif) ![Demo](app/src/main/res/raw/github_gif2.gif)

@@ -5,7 +5,8 @@ import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 
-import com.github.orangegangsters.lollipin.MainActivity;
+import com.github.omadahealth.lollipin.MainActivity;
+import com.github.omadahealth.lollipin.lib.managers.LockManager;
 import com.robotium.solo.Solo;
 
 /**
@@ -13,10 +14,10 @@ import com.robotium.solo.Solo;
  */
 public class AbstractTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private static final String PASSWORD_PREFERENCE_KEY = "PASSCODE";
+    protected static final String PASSWORD_PREFERENCE_KEY = "PASSCODE";
+    protected static final String PASSWORD_ALGORITHM_PREFERENCE_KEY = "ALGORITHM";
     private static final String LAST_ACTIVE_MILLIS_PREFERENCE_KEY = "LAST_ACTIVE_MILLIS";
-    private static final String TIMEOUT_MILLIS_PREFERENCE_KEY = "TIMEOUT_MILLIS_PREFERENCE_KEY";
-    private static final String LOGO_ID_PREFERENCE_KEY = "LOGO_ID_PREFERENCE_KEY";
+    protected static final String ONLY_BACKGROUND_TIMEOUT_PREFERENCE_KEY = "ONLY_BACKGROUND_TIMEOUT_PREFERENCE_KEY";
 
     protected Solo solo;
 
@@ -56,13 +57,7 @@ public class AbstractTest extends ActivityInstrumentationTestCase2<MainActivity>
     }
 
     protected void removeAllPrefs() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove(PASSWORD_PREFERENCE_KEY)
-                .remove(LAST_ACTIVE_MILLIS_PREFERENCE_KEY)
-                .remove(TIMEOUT_MILLIS_PREFERENCE_KEY)
-                .remove(LOGO_ID_PREFERENCE_KEY)
-                .apply();
+        LockManager.getInstance().getAppLock().disableAndRemoveConfiguration();
     }
 
     protected void setMillis(long millis) {
